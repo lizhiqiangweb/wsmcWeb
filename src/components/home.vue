@@ -190,13 +190,13 @@ export default {
 }
 
 .content {
-  margin: 46px auto 0;
+  margin: 0 auto;
   width: 1200px;
 
   h2 {
     text-align: center;
     color: #222;
-    margin: 48px 0 32px 0;
+    margin: 0 0 32px 0;
   }
 
   .f {
@@ -274,7 +274,7 @@ export default {
 .content2 {
   .list {
     ul {
-      margin: 28px 0 0 0;
+      margin: 28px 0 20px 0;
 
       li {
         width: 232px;
@@ -517,6 +517,9 @@ export default {
           text-align: center;
           line-height: 62px;
           margin: 50px 40px 7px 0;
+        }
+        span:hover {
+          cursor: pointer;
         }
       }
     }

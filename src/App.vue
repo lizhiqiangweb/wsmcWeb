@@ -40,7 +40,8 @@ a {
 
 .content {
   width: 1200px;
-  margin: 46px auto 0;
+  margin: 0 auto;
+  padding: 46px 0 0 0;
 }
 
 .el-pager li {

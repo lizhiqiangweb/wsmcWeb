@@ -27,7 +27,6 @@ export default {
   background: #515151;
   height: 120px;
   line-height: 120px;
-  margin: 50px 0 0 0;
 
   p {
     text-align: center;
