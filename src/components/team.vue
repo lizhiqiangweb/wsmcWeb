@@ -3,7 +3,7 @@
 <div class="team">
   <div class="content team-item">
     <div class="itemList" v-for="(item, index) in itemList" :key="index">
-      <img :src="item.url" alt="">
+      <a><img :src="item.url" alt=""></a>
       <div class="itemDis">
         <h3>{{item.name}}</h3>
         <p class="numberDis">{{item.numberDis}}</p>
@@ -89,9 +89,15 @@ export default {
       display: flex;
       padding: 10px 10px;
       background: #fff;
-      margin: 0 10px 28px 0;
+      margin: 0 10px 24px 0;
       width: 570px;
-
+      img {
+        transition: all 0.2s ease-in;
+      }
+      img:hover {
+        cursor: pointer;
+        transform: scale(1.045);
+      }
       .itemDis {
         padding: 20px 18px 0 18px;
 

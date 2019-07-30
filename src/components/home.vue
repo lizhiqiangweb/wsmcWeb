@@ -37,7 +37,7 @@
     <h2>个性化整装产品</h2>
     <div class="list">
       <ul>
-        <li v-for="(item, index) in list" :key="index">{{item}}</li>
+        <li v-for="(item, index) in list" :key="index" @click="cur1=index" :class="cur1==index ? 'active':''">{{item}}</li>
       </ul>
       <div class="list-content">
         <img src="@/assets/images/product_img1.jpg" alt />
@@ -68,11 +68,11 @@
     <div class="content4-main">
       <div class="content4-left">
         <ul>
-          <li v-for="(item, index) in list1" :key="index">{{item}}</li>
+          <li v-for="(item, index) in list1" :key="index" @click="cur=index" :class="cur == index ? 'active': ''">{{item}}</li>
         </ul>
       </div>
       <div class="content4-right">
-        <img src="@/assets/images/f_config1.jpg" alt="">
+        <img v-show="cur==index" v-for="(item, index) in imgList" :key="index" :src="item" alt="">
       </div>
     </div>
   </div>
@@ -146,15 +146,14 @@
           <span class="more">查看更多设计师</span>
         </div>
       </div>
-      
+
     </div>
   </div>
-  
+
 </div>
 </template>
 
 <script>
-
 export default {
   data() {
     return {
@@ -163,7 +162,19 @@ export default {
       input3: "",
       input4: "",
       list: ["新中式风格", "现代黑白灰", "地中海风格", "简欧现代", "更多风格"],
-      list1: ['客厅', '餐厅', '厨房', '卧室', '书房', '玄关', '衣帽间', '儿童房']
+      list1: ['客厅', '餐厅', '厨房', '卧室', '书房', '玄关', '衣帽间', '儿童房'],
+      cur: 0,
+      cur1: 0,
+      imgList: [
+        require('@/assets/images/f_config1.jpg'),
+        require('@/assets/images/f_config1.jpg'),
+        require('@/assets/images/f_config1.jpg'),
+        require('@/assets/images/f_config1.jpg'),
+        require('@/assets/images/f_config1.jpg'),
+        require('@/assets/images/f_config1.jpg'),
+        require('@/assets/images/f_config1.jpg'),
+        require('@/assets/images/f_config1.jpg')
+      ]
     };
   },
 
@@ -241,6 +252,10 @@ export default {
       margin: 18px auto 0;
       display: block;
     }
+
+    button:hover {
+      cursor: pointer;
+    }
   }
 
   .content1-right,
@@ -286,8 +301,11 @@ export default {
         text-align: center;
         margin: 0 10px 0 0;
         box-shadow: 1px 1px 5px #ddd;
+        transition: all 0.3s ease-in;
       }
-
+      li:hover {
+        cursor: pointer;
+      }
       li:last-child {
         margin-right: 0;
       }
@@ -330,6 +348,10 @@ export default {
           text-align: center;
           line-height: 60px;
         }
+
+        .btn:hover {
+          cursor: pointer;
+        }
       }
     }
   }
@@ -371,13 +393,11 @@ export default {
         text-align: center;
         margin: 6px 0 0 0;
         box-shadow: 1px 4px 8px -1px #ddd;
+        transition: all 0.3s ease-in;
       }
 
-      li:first-child {
-        background: #29498a;
-        font-size: 18px;
-        color: #fff;
-        margin: 0;
+      li:hover {
+        cursor: pointer;
       }
     }
   }
@@ -451,11 +471,11 @@ export default {
           }
 
           .pre {
-            left: 365px;
+            left: 12em;
           }
 
           .next {
-            right: 365px;
+            right: 12em;
           }
         }
       }
@@ -488,6 +508,7 @@ export default {
       ul {
         display: flex;
         justify-content: center;
+
         .item-case {
           width: 293px;
           height: 296px;
@@ -496,18 +517,22 @@ export default {
 
           .case-dis {
             padding: 14px 20px;
+
             p {
               line-height: 1.6;
             }
           }
         }
+
         .item-case:last-child {
           margin-right: 0;
         }
       }
+
       .content5-btn {
         display: flex;
         justify-content: center;
+
         .more {
           width: 300px;
           height: 62px;
@@ -518,6 +543,7 @@ export default {
           line-height: 62px;
           margin: 50px 40px 7px 0;
         }
+
         span:hover {
           cursor: pointer;
         }

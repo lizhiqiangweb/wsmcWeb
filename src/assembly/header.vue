@@ -18,10 +18,10 @@
     </div>
   </div>
 
-  <div class="banner">
-    <el-carousel :interval="5000" height="742px">
+  <div class="swiper">
+    <el-carousel :interval="5000" :height="bannerHeight + 'px'">
       <el-carousel-item v-for="item in banner" :key="item">
-        <img :src="item" alt="">
+        <img :src="item" alt="" ref="image" @load="imageLoaded">
       </el-carousel-item>
     </el-carousel>
   </div>
@@ -29,12 +29,11 @@
 </template>
 
 <script>
-import '@/assets/js/main.js'
-
 export default {
   name: "Header",
   data() {
     return {
+      bannerHeight: 740,
       navlist: [{
           tit: "首页",
           path: '/'
@@ -72,17 +71,26 @@ export default {
 
   computed: {},
 
-  mounted: {
-
+  mounted: function () {
+    window.addEventListener('resize', () => {
+      this.bannerHeight = this.$refs.image[0].height
+    }, false)
   },
 
   methods: {
-
+    imageLoaded: function () {
+      this.count++
+      if (this.count === 1) {
+        this.$nextTick(() => {
+          this.bannerHeight = this.$refs.image[0].height
+        })
+      }
+    }
   },
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
 .top {
   display: flex;
   justify-content: center;
@@ -137,14 +145,14 @@ export default {
 
 //走马灯自适应
 .el-carousel__container {
-  height: 100% !important;
-
+  // height: 740px !important;
   img {
     display: block;
-    height: auto;
+    height: 740px !important;
     max-width: 100%;
   }
 }
+
 
 .active {
   background: #29498a;

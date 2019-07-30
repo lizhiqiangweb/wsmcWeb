@@ -4,7 +4,9 @@
   <div class="content list">
     <ul v-for="(item, index) in list" :key="index">
       <p>{{item.tit}}</p>
-      <li v-for="(item1, index1) in item.listItem" :key="index1" @click="cur=index.index1" :class="{active:cur==index1}">{{item1}}</li>
+      <li v-for="(item1, index1) in item.listItem1" :key="index1" @click="cur1=index1" :class="cur1==index1 ? 'active':''">{{item1}}</li>
+      <li v-for="(item1, index1) in item.listItem2" :key="index1" @click="cur2=index1" :class="cur2==index1 ? 'active':''">{{item1}}</li>
+      <li v-for="(item1, index1) in item.listItem3" :key="index1" @click="cur3=index1" :class="cur3==index1 ? 'active':''">{{item1}}</li>
     </ul>
   </div>
 
@@ -30,18 +32,20 @@
 export default {
   data() {
     return {
-      cur: 0,
+      cur1: 0,
+      cur2: 0,
+      cur3: 0,
       list: [{
           tit: '风格',
-          listItem: ['全部', '新中式', '现代黑白灰', '地中海', '简欧现代', '欧式别墅', '现代泰式', '小美风', '轻奢风', '北欧']
+          listItem1: ['全部', '新中式', '现代黑白灰', '地中海', '简欧现代', '欧式别墅', '现代泰式', '小美风', '轻奢风', '北欧']
         },
         {
           tit: '户型',
-          listItem: ['全部', '客厅', '餐厅', '厨房', '卧室', '书房', '玄关', '衣帽间', '儿童房']
+          listItem2: ['全部', '客厅', '餐厅', '厨房', '卧室', '书房', '玄关', '衣帽间', '儿童房']
         },
         {
           tit: '空间',
-          listItem: ['全部', '80-100㎡', '100-120㎡', '120-150㎡', '150㎡以上', '别墅']
+          listItem3: ['全部', '80-100㎡', '100-120㎡', '120-150㎡', '150㎡以上', '别墅']
         }
       ],
       imgList: [{
