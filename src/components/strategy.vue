@@ -1,6 +1,14 @@
 <!--  -->
 <template>
 <div class="strategy">
+
+  <div class="swiper">
+    <el-carousel :interval="5000" :height="bannerHeight + 'px'">
+      <el-carousel-item v-for="item in banner" :key="item">
+        <img :src="item" alt="" ref="image">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
   <div class="content tabList">
     <ul>
       <li :class="cur == index ? 'active': ''" v-for="(item, index) in dataList" :key="index" @click="cur=index">{{item.tit}}</li>
@@ -31,6 +39,12 @@ export default {
   data() {
     return {
       cur: 0,
+      bannerHeight: 740,
+      banner: [
+        require("@/assets/images/banner1.jpg"),
+        require("@/assets/images/banner2.jpg"),
+        require("@/assets/images/banner3.jpg"),
+      ],
       dataList: [{
           tit: '选购主材',
           contents: [{

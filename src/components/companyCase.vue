@@ -1,6 +1,13 @@
 <!--  -->
 <template>
 <div class="companyCase">
+  <div class="swiper">
+    <el-carousel :interval="5000" :height="bannerHeight + 'px'">
+      <el-carousel-item v-for="item in banner" :key="item">
+        <img :src="item" alt="" ref="image">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
   <div class="content list">
     <ul v-for="(item, index) in list" :key="index">
       <p>{{item.tit}}</p>
@@ -35,6 +42,12 @@ export default {
       cur1: 0,
       cur2: 0,
       cur3: 0,
+      bannerHeight: 740,
+      banner: [
+        require("@/assets/images/banner1.jpg"),
+        require("@/assets/images/banner2.jpg"),
+        require("@/assets/images/banner3.jpg"),
+      ],
       list: [{
           tit: '风格',
           listItem1: ['全部', '新中式', '现代黑白灰', '地中海', '简欧现代', '欧式别墅', '现代泰式', '小美风', '轻奢风', '北欧']

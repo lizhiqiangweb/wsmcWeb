@@ -1,13 +1,20 @@
 <!--  -->
 <template>
 <div class="home">
+  <div class="swiper">
+    <el-carousel :interval="5000" :height="bannerHeight + 'px'">
+      <el-carousel-item v-for="item in banner" :key="item">
+        <img :src="item" alt="" ref="image">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
   <div class="content flex">
     <div class="content1-left">
-      <div class="content1-item active">
+      <div class="content1-item" :class="{active:cur2==0}" @click="active(0)">
         <img src="@/assets/images/icon1.jpg" alt />
         <div>免费上门量尺</div>
       </div>
-      <div class="content1-item">
+      <div class="content1-item" :class="{active:cur2==1}" @click="active(1)">
         <img src="@/assets/images/icon3.jpg" alt />
         <div>免费出装修预算</div>
       </div>
@@ -22,11 +29,11 @@
       <button type="submit" value>立即预约</button>
     </div>
     <div class="content1-right">
-      <div class="content1-item">
+      <div class="content1-item" :class="{active:cur2==2}" @click="active(2)">
         <img src="@/assets/images/icon2.jpg" alt />
         <div>免费卫生清洁</div>
       </div>
-      <div class="content1-item">
+      <div class="content1-item" :class="{active:cur2==3}" @click="active(3)">
         <img src="@/assets/images/icon4.jpg" alt />
         <div>免费估算装修报价</div>
       </div>
@@ -80,35 +87,31 @@
   <div class="content5">
     <h2>精英设计团队</h2>
     <div class="content5-content">
-      <div class="content5-team">
-        <div class="team-item">
+      <div class="content5-team window" :style="containerStyle" @mouseover="stop" @mouseleave="play">
+        <div class="team-item" :style="{width:imgWidth+'px'}" v-for="(item, index) in teamList" :key="index">
           <div class="item-content item-1">
-            <p>用心体验生活的点滴， 才能从细节中
-              创造出更为舒适的居住环境
-              它是和谐的、有品质的、有生命力的。</p>
-            <span>设计理念</span>
+            <p>{{item.linianDis}}</p>
+            <span>{{item.linian}}</span>
           </div>
           <div class="item-content item-2">
-            <p>用心体验生活的点滴， 才能从细节中
-              创造出更为舒适的居住环境
-              它是和谐的、有品质的、有生命力的。</p>
-            <span>设计理念</span>
+            <p>{{item.xindeDis}}</p>
+            <span>{{item.xinde}}</span>
           </div>
           <div class="item-content item-3">
-            <p>用心体验生活的点滴， 才能从细节中
-              创造出更为舒适的居住环境
-              它是和谐的、有品质的、有生命力的。</p>
-            <span>设计理念</span>
+            <p>{{item.dis}}</p>
+            <span>{{item.name}}</span>
           </div>
           <div class="team-icon">
             <img src="@/assets/images/team_icon1.jpg" alt="">
           </div>
-          <div class="btn">
-            <div class="pre">&lt;</div>
-            <div class="next">&gt;</div>
-          </div>
+        </div>
+
+        <div class="btn">
+          <div class="pre" @click="move(1000,1,speed)">&lt;</div>
+          <div class="next" @click="move(1000,-1,speed)">&gt;</div>
         </div>
       </div>
+
       <div class="content5-case">
         <h3>优秀设计案例</h3>
         <ul>
@@ -155,6 +158,17 @@
 
 <script>
 export default {
+  name: 'home',
+  props: {
+    initialSpeed: {
+      type: Number,
+      default: 30
+    },
+    initialInterval: {
+      type: Number,
+      default: 3
+    }
+  },
   data() {
     return {
       input1: "",
@@ -165,6 +179,13 @@ export default {
       list1: ['客厅', '餐厅', '厨房', '卧室', '书房', '玄关', '衣帽间', '儿童房'],
       cur: 0,
       cur1: 0,
+      cur2: 0,
+      bannerHeight: 740,
+      banner: [
+        require("@/assets/images/banner1.jpg"),
+        require("@/assets/images/banner2.jpg"),
+        require("@/assets/images/banner3.jpg"),
+      ],
       imgList: [
         require('@/assets/images/f_config1.jpg'),
         require('@/assets/images/f_config1.jpg'),
@@ -174,7 +195,29 @@ export default {
         require('@/assets/images/f_config1.jpg'),
         require('@/assets/images/f_config1.jpg'),
         require('@/assets/images/f_config1.jpg')
-      ]
+      ],
+      teamList: [{
+          name: '陈芸熙',
+          dis: '三年工作经验，擅长简欧轻奢和现代风格',
+          xinde: '设计心得',
+          xindeDis: '用心体验生活的点滴， 才能从细节中创造出更为舒适的居住环境。它是和谐的、有品质的、有生命力的。',
+          linian: '设计理念',
+          linianDis: '用心体验生活的点滴， 才能从细节中创造出更为舒适的居住环境'
+        },
+        {
+          name: '陈芸熙1',
+          dis: '三年工作经验，擅长简欧轻奢和现代风格',
+          xinde: '设计心得',
+          xindeDis: '用心体验生活的点滴， 才能从细节中创造出更为舒适的居住环境。它是和谐的、有品质的、有生命力的。',
+          linian: '设计理念',
+          linianDis: '用心体验生活的点滴， 才能从细节中创造出更为舒适的居住环境'
+        }
+      ],
+      imgWidth: 1000,
+      currentIndex: 1,
+      distance: -1000,
+      transitionEnd: true,
+      speed: this.initialSpeed
     };
   },
 
@@ -182,11 +225,82 @@ export default {
 
   },
 
-  computed: {},
+  computed: {
+    containerStyle() {
+      return {
+        transform: 'translate3d(${this.distance}px, 0, 0)'
+      }
+    },
+    interval() {
+      return this.initialInterval * 1000
+    }
+  },
 
-  mounted: {},
+  mounted() {
+    this.init()
+  },
 
-  methods: {}
+  methods: {
+    active: function (number) {
+      this.cur2 = number
+    },
+
+    init() {
+      this.play()
+      window.onblur = function () {
+        this.stop()
+      }.bind(this)
+      window.onfocus = function () {
+        this.play()
+      }.bind(this)
+    },
+    move(offset, direction, speed) {
+      if (!this.transitionEnd) return
+      this.transitionEnd = false
+      direction === -1 ? this.currentIndex += offset / 1000 : this.currentIndex -= offset / 1000
+      if (this.currentIndex > 3) this.currentIndex = 1
+      if (this.currentIndex < 1) this.currentIndex = 3
+
+      const destination = this.distance + offset * direction
+      this.animate(destination, direction, speed)
+    },
+    animate(des, direc, speed) {
+      if (this.temp) {
+        window.clearInterval(this.temp);
+        this.temp = null;
+      }
+      this.temp = window.setInterval(() => {
+        if ((direc === -1 && des < this.distance) || (direc === 1 && des > this.distance)) {
+          this.distance += speed * direc
+        } else {
+          this.transitionEnd = true
+          window.clearInterval(this.temp)
+          this.distance = des
+          if (des < -3000) this.distance = -1000
+          if (des > -1000) this.distance = -3000
+        }
+      }, 20)
+    },
+    jump(index) {
+      const direction = index - this.currentIndex >= 0 ? -1 : 1;
+      const offset = Math.abs(index - this.currentIndex) * 1000;
+      const jumpSpeed = Math.abs(index - this.currentIndex) === 0 ? this.speed : Math.abs(index - this.currentIndex) * this.speed;
+      this.move(offset, direction, jumpSpeed)
+    },
+    play() {
+      if (this.timer) {
+        window.clearInterval(this.timer)
+        this.timer = null
+      }
+      this.timer = window.setInterval(() => {
+        this.move(1000, -1, this.speed)
+      }, this.interval)
+    },
+    stop() {
+      window.clearInterval(this.timer)
+      this.timer = null
+    }
+  }
 };
 </script>
 
@@ -270,6 +384,10 @@ export default {
         margin: 46px 0 0 0;
       }
     }
+
+    .content1-item:hover {
+      cursor: pointer;
+    }
   }
 
   .content1-left {
@@ -303,9 +421,11 @@ export default {
         box-shadow: 1px 1px 5px #ddd;
         transition: all 0.3s ease-in;
       }
+
       li:hover {
         cursor: pointer;
       }
+
       li:last-child {
         margin-right: 0;
       }
@@ -417,10 +537,15 @@ export default {
 
   .content5-content {
     .content5-team {
+      position: relative;
+      width: 1000px;
+      overflow: hidden;
+      display: flex;
+      margin: 0 auto;
+
       .team-item {
         display: flex;
         justify-content: center;
-        position: relative;
 
         .item-content {
           display: flex;
@@ -457,33 +582,35 @@ export default {
           }
         }
 
-        .btn {
-          opacity: 0;
-          transition: all 0.3s ease-in;
+      }
 
-          .pre,
-          .next {
-            font-size: 24px;
-            background: #ddd;
-            position: absolute;
-            top: 45%;
-            padding: 12px 16px;
-          }
+      .btn {
+        opacity: 0;
+        transition: all 0.3s ease-in;
 
-          .pre {
-            left: 12em;
-          }
+        .pre,
+        .next {
+          font-size: 24px;
+          background: #ddd;
+          position: absolute;
+          top: 45%;
+          padding: 12px 16px;
+        }
 
-          .next {
-            right: 12em;
-          }
+        .pre {
+          left: 12em;
+        }
+
+        .next {
+          right: 12em;
         }
       }
 
-      .team-item:hover .btn {
-        opacity: 0.875;
-        cursor: pointer;
-      }
+    }
+
+    .content5-team:hover .btn {
+      opacity: 0.875;
+      cursor: pointer;
     }
 
     .content5-case {

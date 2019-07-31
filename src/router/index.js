@@ -6,6 +6,8 @@ import vrScene from '../components/vrScene'
 import team from '../components/team'
 import strategy from '../components/strategy'
 import aboutUs from '../components/aboutUs'
+import slider from '../components/slider'
+import teamMember from '../components/teamMember'
 
 Vue.use(Router)
 
@@ -41,6 +43,16 @@ export default new Router({
       path: '/aboutUs',
       name: 'aboutUs',
       component: aboutUs
+    },
+    {
+      path: '/slider',
+      name: 'slider',
+      component: slider
+    },
+    {
+      path: '/teamMember',
+      name: 'teamMember',
+      component: teamMember
     }
   ]
 })

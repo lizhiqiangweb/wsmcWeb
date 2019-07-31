@@ -1,9 +1,16 @@
 <!--  -->
 <template>
 <div class="team">
+  <div class="swiper">
+    <el-carousel :interval="5000" :height="bannerHeight + 'px'">
+      <el-carousel-item v-for="item in banner" :key="item">
+        <img :src="item" alt="" ref="image">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
   <div class="content team-item">
     <div class="itemList" v-for="(item, index) in itemList" :key="index">
-      <a><img :src="item.url" alt=""></a>
+      <router-link :to="{ path : item.url, query: { userId: 123} }" ><img :src="item.imgUrl" alt=""></router-link>
       <div class="itemDis">
         <h3>{{item.name}}</h3>
         <p class="numberDis">{{item.numberDis}}</p>
@@ -27,41 +34,53 @@
 export default {
   data() {
     return {
+      bannerHeight: 740,
+      banner: [
+        require("@/assets/images/banner1.jpg"),
+        require("@/assets/images/banner2.jpg"),
+        require("@/assets/images/banner3.jpg"),
+      ],
       itemList: [{
-          url: require('@/assets/images/number_img1.jpg'),
+          imgUrl: require('@/assets/images/number_img1.jpg'),
           name: '晶晶',
           numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境'
+          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          url: '/teamMember'
         },
         {
-          url: require('@/assets/images/number_img1.jpg'),
+          imgUrl: require('@/assets/images/number_img1.jpg'),
           name: '晶晶',
           numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境'
+          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          url: '/teamMember'
         },
         {
-          url: require('@/assets/images/number_img1.jpg'),
+          imgUrl: require('@/assets/images/number_img1.jpg'),
           name: '晶晶',
           numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境'
+          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          url: '/teamMember'
         },
         {
-          url: require('@/assets/images/number_img1.jpg'),
+          imgUrl: require('@/assets/images/number_img1.jpg'),
           name: '晶晶',
           numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境'
+          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          url: '/teamMember'
         },
         {
-          url: require('@/assets/images/number_img1.jpg'),
+          imgUrl: require('@/assets/images/number_img1.jpg'),
           name: '晶晶',
           numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境'
+          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          url: '/teamMember'
         },
         {
-          url: require('@/assets/images/number_img1.jpg'),
+          imgUrl: require('@/assets/images/number_img1.jpg'),
           name: '晶晶',
           numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境'
+          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          url: '/teamMember'
         }
       ]
     };
@@ -73,7 +92,9 @@ export default {
 
   mounted: {},
 
-  methods: {}
+  methods: {
+    
+  }
 }
 </script>
 

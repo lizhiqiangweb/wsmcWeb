@@ -1,6 +1,13 @@
 <!--  -->
 <template>
 <div class="aboutUs">
+  <div class="swiper">
+    <el-carousel :interval="5000" :height="bannerHeight + 'px'">
+      <el-carousel-item v-for="item in banner" :key="item">
+        <img :src="item" alt="" ref="image">
+      </el-carousel-item>
+    </el-carousel>
+  </div>
   <div class="content-item content">
     <div class="item-tit">
       <h1>01</h1>
@@ -78,6 +85,12 @@
 export default {
   data() {
     return {
+      bannerHeight: 740,
+      banner: [
+        require("@/assets/images/banner1.jpg"),
+        require("@/assets/images/banner2.jpg"),
+        require("@/assets/images/banner3.jpg"),
+      ],
       imgList: [
         require('@/assets/images/aboutUs_img1.jpg'),
         require('@/assets/images/aboutUs_img1.jpg'),

@@ -11,20 +11,14 @@
     </div>
     <div class="navlist" ref="nav" v-bind="show">
       <ul>
-        <li v-for="(item, index) in navlist" :key="index">
+        <li v-for="(item, index) in navlist" :key="index" @click="cur=index" :class="cur==index?'active':''">
           <router-link :to="{ path : item.path }">{{item.tit}}</router-link>
         </li>
       </ul>
     </div>
   </div>
 
-  <div class="swiper">
-    <el-carousel :interval="5000" :height="bannerHeight + 'px'">
-      <el-carousel-item v-for="item in banner" :key="item">
-        <img :src="item" alt="" ref="image" @load="imageLoaded">
-      </el-carousel-item>
-    </el-carousel>
-  </div>
+  
 </div>
 </template>
 
@@ -33,7 +27,7 @@ export default {
   name: "Header",
   data() {
     return {
-      bannerHeight: 740,
+      cur: 0,
       navlist: [{
           tit: "首页",
           path: '/'
@@ -58,39 +52,32 @@ export default {
           tit: "唯世美创",
           path: '/aboutUs'
         }
-      ],
-      banner: [
-        require("@/assets/images/banner1.jpg"),
-        require("@/assets/images/banner2.jpg"),
-        require("@/assets/images/banner3.jpg"),
       ]
     };
   },
 
   components: {},
 
-  computed: {},
+  computed: {
 
-  mounted: function () {
-    window.addEventListener('resize', () => {
-      this.bannerHeight = this.$refs.image[0].height
-    }, false)
+  },
+
+  mounted: {
+
+  },
+
+  //在实例创建后获取传参
+  created() {
+
   },
 
   methods: {
-    imageLoaded: function () {
-      this.count++
-      if (this.count === 1) {
-        this.$nextTick(() => {
-          this.bannerHeight = this.$refs.image[0].height
-        })
-      }
-    }
+
   },
 };
 </script>
 
-<style lang="scss" >
+<style lang="scss">
 .top {
   display: flex;
   justify-content: center;
@@ -143,18 +130,11 @@ export default {
   }
 }
 
-//走马灯自适应
-.el-carousel__container {
-  // height: 740px !important;
-  img {
-    display: block;
-    height: 740px !important;
-    max-width: 100%;
-  }
-}
-
-
 .active {
   background: #29498a;
+
+  a {
+    color: #fff !important;
+  }
 }
 </style>
