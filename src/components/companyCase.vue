@@ -20,7 +20,9 @@
   <div class="content imgList">
     <ul>
       <li v-for="(item, index) in imgList" :key="index">
-        <img :src="item.url" alt="">
+        <router-link :to="{ path : item.url, query: { case: item.id } }">
+          <img :src="item.imgUrl" alt="">
+        </router-link>
         <h4>{{item.tit}}</h4>
         <p>{{item.dis}}</p>
       </li>
@@ -50,7 +52,7 @@ export default {
       ],
       list: [{
           tit: '风格',
-          listItem1: ['全部', '新中式', '现代黑白灰', '地中海', '简欧现代', '欧式别墅', '现代泰式', '小美风', '轻奢风', '北欧']
+          listItem1: ['全部', '新中式', '现代黑白灰', '地中海', '简欧现代', '欧式别墅', '小美风', '轻奢风', '北欧']
         },
         {
           tit: '户型',
@@ -62,29 +64,54 @@ export default {
         }
       ],
       imgList: [{
-          url: require('../assets/images/companyCase_img1.jpg'),
-          tit: '现代风格案例图',
-          dis: '| 三居 | 120-150㎡ | 现代装修风格设计'
+          id: 'bo1',
+          imgUrl: require('../assets/images/case/bo/1/main.jpg'),
+          tit: '北欧风格案例图',
+          dis: '| 二居 | 80-100㎡ | 北欧装修风格设计',
+          url: '/caseContent'
         },
         {
-          url: require('../assets/images/companyCase_img1.jpg'),
-          tit: '现代风格案例图',
-          dis: '| 三居 | 120-150㎡ | 现代装修风格设计'
+          id: 'bo2',
+          imgUrl: require('../assets/images/case/bo/2/main.jpg'),
+          tit: '北欧风格案例图',
+          dis: '| 三居 | 100-140㎡ | 北欧装修风格设计',
+          url: '/caseContent'
         },
         {
-          url: require('../assets/images/companyCase_img1.jpg'),
-          tit: '现代风格案例图',
-          dis: '| 三居 | 120-150㎡ | 现代装修风格设计'
+          id: 'bo3',
+          imgUrl: require('../assets/images/case/bo/3/main.jpg'),
+          tit: '北欧风格案例图',
+          dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
+          url: '/caseContent'
         },
         {
-          url: require('../assets/images/companyCase_img1.jpg'),
-          tit: '现代风格案例图',
-          dis: '| 三居 | 120-150㎡ | 现代装修风格设计'
+          id: 'bo4',
+          imgUrl: require('../assets/images/case/bo/4/main.jpg'),
+          tit: '北欧风格案例图',
+          dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
+          url: '/caseContent'
+        },
+        {
+          id: 'bo5',
+          imgUrl: require('../assets/images/case/bo/5/main.jpg'),
+          tit: '北欧风格案例图',
+          dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
+          url: '/caseContent'
+        },
+        {
+          id: 'bo6',
+          imgUrl: require('../assets/images/case/bo/6/main.jpg'),
+          tit: '北欧风格案例图',
+          dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
+          url: '/caseContent'
         }
-      ]
+
+      ],
     };
   },
-
+  props: [
+    
+  ],
   components: {},
 
   computed: {},
@@ -131,6 +158,11 @@ export default {
         background: #fff;
         padding: 8px 8px;
         margin: 0 8px 26px 0;
+
+        img {
+          width: 375px;
+          height: 375px;
+        }
       }
 
       h4 {
@@ -142,10 +174,12 @@ export default {
       }
     }
   }
+
   .page {
     display: flex;
     justify-content: center;
     padding: 50px 0 50px 0;
+
     .el-pager li {
       background-color: #fff !important;
     }

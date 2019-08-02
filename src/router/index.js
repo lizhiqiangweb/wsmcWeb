@@ -6,8 +6,9 @@ import vrScene from '../components/vrScene'
 import team from '../components/team'
 import strategy from '../components/strategy'
 import aboutUs from '../components/aboutUs'
-import slider from '../components/slider'
+import slider from '../components/slider' //test
 import teamMember from '../components/teamMember'
+import caseContent from '../components/caseContent'
 
 Vue.use(Router)
 
@@ -53,6 +54,11 @@ export default new Router({
       path: '/teamMember',
       name: 'teamMember',
       component: teamMember
+    },
+    {
+      path: '/caseContent',
+      name: 'caseContent',
+      component: caseContent
     }
   ]
 })

@@ -10,7 +10,7 @@
   </div>
   <div class="content team-item">
     <div class="itemList" v-for="(item, index) in itemList" :key="index">
-      <router-link :to="{ path : item.url, query: { userId: 123} }" ><img :src="item.imgUrl" alt=""></router-link>
+      <router-link :to="{ path : item.url, query: { id: 123} }" ><img :src="item.imgUrl" alt=""></router-link>
       <div class="itemDis">
         <h3>{{item.name}}</h3>
         <p class="numberDis">{{item.numberDis}}</p>
