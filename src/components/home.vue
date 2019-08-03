@@ -87,8 +87,8 @@
   <div class="content5">
     <h2>精英设计团队</h2>
     <div class="content5-content">
-      <div class="content5-team window" :style="containerStyle" @mouseover="stop" @mouseleave="play">
-        <div class="team-item" :style="{width:imgWidth+'px'}" v-for="(item, index) in teamList" :key="index">
+      <div class="content5-team window">
+        <div class="team-item" :style="{width:imgWidth+'px'}" v-for="(item, index) in teamList" :key="index" @mouseover="stop" @mouseleave="play">
           <div class="item-content item-1">
             <p>{{item.linianDis}}</p>
             <span>{{item.linian}}</span>
@@ -550,7 +550,6 @@ export default {
         .item-content {
           display: flex;
           margin: 44px 0 0 0;
-
           p,
           span {
             writing-mode: tb-rl;
@@ -598,11 +597,11 @@ export default {
         }
 
         .pre {
-          left: 12em;
+          left: 1em;
         }
 
         .next {
-          right: 12em;
+          right: 1em;
         }
       }
 
