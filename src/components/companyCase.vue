@@ -11,15 +11,15 @@
   <div class="content list">
     <ul v-for="(item, index) in list" :key="index">
       <p>{{item.tit}}</p>
-      <li v-for="(item1, index1) in item.listItem1" :key="index1" @click="cur1=index1" :class="cur1==index1 ? 'active':''">{{item1}}</li>
-      <li v-for="(item1, index1) in item.listItem2" :key="index1" @click="cur2=index1" :class="cur2==index1 ? 'active':''">{{item1}}</li>
-      <li v-for="(item1, index1) in item.listItem3" :key="index1" @click="cur3=index1" :class="cur3==index1 ? 'active':''">{{item1}}</li>
+      <li v-for="(item1, index1) in item.listItem1" :key="index1" v-on:click="selected1(index1)" @click="cur1=index1" :class="cur1==index1 ? 'active':''">{{item1}}</li>
+      <li v-for="(item2, index2) in item.listItem2" :key="index2" v-on:click="selected2(index2)" @click="cur2=index2" :class="cur2==index2 ? 'active':''">{{item2}}</li>
+      <li v-for="(item3, index3) in item.listItem3" :key="index3" v-on:click="selected3(index3)" @click="cur3=index3" :class="cur3==index3 ? 'active':''">{{item3}}</li>
     </ul>
   </div>
 
   <div class="content imgList">
     <ul>
-      <li v-for="(item, index) in imgList.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="index">
+      <li v-for="(item, index) in imgList.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="index" v-show="(typeId == item.type || typeId == 0) && (styleId1 == item.style || styleId1 == 0)">
         <router-link :to="{ path : item.url, query: { case: item.id } }">
           <img :src="item.imgUrl" alt="">
         </router-link>
@@ -53,6 +53,9 @@ export default {
       all: 0, //默认数据总数
       totalPage: 0, //当前条数
       pagesize: 6, //每页的数据显示条数
+      typeId: 0,
+      styleId1: 0,
+      styleId2: 0,
       list: [{ //tab
           tit: '风格',
           listItem1: ['全部', '新中式', '现代黑白灰', '地中海', '简欧现代', '欧式别墅', '小美风', '轻奢风', '北欧']
@@ -71,70 +74,82 @@ export default {
           imgUrl: require('../assets/images/case/bo/1/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 二居 | 80-100㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8,
+          style: 1
         },
         {
           id: 'bo2',
           imgUrl: require('../assets/images/case/bo/2/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 100-140㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8,
+          style: 1
         },
         {
           id: 'bo3',
           imgUrl: require('../assets/images/case/bo/3/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 二居 | 80-120㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         },
         {
           id: 'bo4',
           imgUrl: require('../assets/images/case/bo/4/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         },
         {
           id: 'bo5',
           imgUrl: require('../assets/images/case/bo/5/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         },
         {
           id: 'bo6',
           imgUrl: require('../assets/images/case/bo/6/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         },
         {
           id: 'bo7',
           imgUrl: require('../assets/images/case/dzh/1/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         },
         {
           id: 'bo8',
           imgUrl: require('../assets/images/case/dzh/2/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         },
         {
           id: 'bo9',
           imgUrl: require('../assets/images/case/dzh/3/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         },
         {
           id: 'bo10',
           imgUrl: require('../assets/images/case/dzh/4/main.jpg'),
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
-          url: '/caseContent'
+          url: '/caseContent',
+          type: 8
         }
 
       ],
@@ -152,6 +167,27 @@ export default {
   methods: {
     current_change(currentPage) { //改变当前页
       this.currentPage = currentPage
+    },
+    selected1: function(index) {
+      if(index) {
+        this.typeId = index;
+      } else {
+        this.typeId = 0;
+      }
+    },
+    selected2: function(index) {
+      if(index) {
+        this.styleId1 = index;
+      } else {
+        this.styleId1 = 0;
+      }
+    },
+    selected3: function(index) {
+      if(index) {
+        this.styleId2 = index;
+      } else {
+        this.styleId2 = 0;
+      }
     }
   }
 }
