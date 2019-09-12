@@ -32,7 +32,7 @@
 
     <div class="item-main">
       <div class="main-imgList">
-        <img v-for="(item, index) in imgList" :key="index" :src="item" alt="">
+        <img v-for="(item, mainImgIndex) in imgList" :key="mainImgIndex" :src="item" alt="">
       </div>
     </div>
 
@@ -43,24 +43,24 @@
     </div>
 
     <div class="item-main1">
-      <div v-for="(item, index) in postList1" :key="index">
+      <div v-for="(item, item1Index) in postList1" :key="item1Index">
         <h3>{{item.post}}<span>{{item.wages}}</span></h3>
         <div class="item-content">
-          <p v-for="(dis, index) in item.postDis" :key="index">{{dis}}</p>
+          <p v-for="(dis, item1ContentIndex) in item.postDis" :key="item1ContentIndex">{{dis}}</p>
         </div>
       </div>
 
-      <div v-for="(item, index) in postList2" :key="index">
+      <div v-for="(item, item2Index) in postList2" :key="item2Index">
         <h3>{{item.post}}<span>{{item.wages}}</span></h3>
         <div class="item-content">
-          <p v-for="(dis, index) in item.postDis" :key="index">{{dis}}</p>
+          <p v-for="(dis, item2ContentIndex) in item.postDis" :key="item2ContentIndex">{{dis}}</p>
         </div>
       </div>
 
-      <div v-for="(item, index) in postList3" :key="index">
+      <div v-for="(item, item3Index) in postList3" :key="item3Index">
         <h3>{{item.post}}<span>{{item.wages}}</span></h3>
         <div class="item-content">
-          <p v-for="(dis, index) in item.postDis" :key="index">{{dis}}</p>
+          <p v-for="(dis, item3ContentIndex) in item.postDis" :key="item3ContentIndex">{{dis}}</p>
         </div>
       </div>
     </div>
@@ -73,7 +73,7 @@
 
     <div class="item-main">
       <div class="main-imgList">
-        <img v-for="(item, index) in imgList1" :key="index" :src="item" alt="">
+        <img v-for="(item, videoIndex) in imgList1" :key="videoIndex" :src="item" alt="">
       </div>
     </div>
 
@@ -112,52 +112,47 @@ export default {
         require('@/assets/images/aboutUs_img3.jpg')
       ],
       postList1: [{
-          post: '销售人员8名（市场部)',
-          wages: '6000-8000元',
-          postDis: [
-            '任职资格：',
-            '1、高中以上学历，普通话流利、服务意识强，对自己有清晰的人生规划；',
-            '2、有家居店面销售工作经验者优先；',
-            '3、具备良好的商务谈判能力;',
-            '4、了解产品信息，掌握相关市场动态;',
-            '5、具备良好的表达能力和沟通协调能力。'
-          ]
-        }
-      ],
+        post: '销售人员8名（市场部)',
+        wages: '6000-8000元',
+        postDis: [
+          '任职资格：',
+          '1、高中以上学历，普通话流利、服务意识强，对自己有清晰的人生规划；',
+          '2、有家居店面销售工作经验者优先；',
+          '3、具备良好的商务谈判能力;',
+          '4、了解产品信息，掌握相关市场动态;',
+          '5、具备良好的表达能力和沟通协调能力。'
+        ]
+      }],
       postList2: [{
-          post: '销售人员 8名（网络部）',
-          wages: '4000-10000元',
-          postDis: [
-            '任职资格：',
-            '1、高中以上学历，普通话流利、服务意识强，对自己有清晰的人生规划；',
-            '2、有家居店面销售工作经验者优先；',
-            '3、具有较强的沟通能力及服务意识，吃苦耐劳；',
-            '4、年龄20-35岁，形象良好，身体健康，气质佳；',
-            '5、上班地址在长沙市各区域店。'
-          ]
-        }
-      ],
+        post: '销售人员 8名（网络部）',
+        wages: '4000-10000元',
+        postDis: [
+          '任职资格：',
+          '1、高中以上学历，普通话流利、服务意识强，对自己有清晰的人生规划；',
+          '2、有家居店面销售工作经验者优先；',
+          '3、具有较强的沟通能力及服务意识，吃苦耐劳；',
+          '4、年龄20-35岁，形象良好，身体健康，气质佳；',
+          '5、上班地址在长沙市各区域店。'
+        ]
+      }],
       postList3: [{
-          post: '销售人员8名（市场部)',
-          wages: '6000-8000元',
-          postDis: [
-            '任职资格：',
-            '1、高中以上学历，普通话流利、服务意识强，对自己有清晰的人生规划；',
-            '2、有家居店面销售工作经验者优先；',
-            '3、具备良好的商务谈判能力;',
-            '4、了解产品信息，掌握相关市场动态;',
-            '5、上班地址在长沙市各区域店。'
-          ]
-        }
-      ]
+        post: '销售人员8名（市场部)',
+        wages: '6000-8000元',
+        postDis: [
+          '任职资格：',
+          '1、高中以上学历，普通话流利、服务意识强，对自己有清晰的人生规划；',
+          '2、有家居店面销售工作经验者优先；',
+          '3、具备良好的商务谈判能力;',
+          '4、了解产品信息，掌握相关市场动态;',
+          '5、上班地址在长沙市各区域店。'
+        ]
+      }]
     };
   },
 
   components: {},
 
   computed: {},
-
-  mounted: {},
 
   methods: {}
 }

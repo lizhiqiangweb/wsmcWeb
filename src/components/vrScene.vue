@@ -27,7 +27,7 @@
   </div>
 
   <div class="page">
-    <el-pagination background="true" layout="prev, pager, next" :total="100">
+    <el-pagination background layout="prev, pager, next" :total="100">
     </el-pagination>
   </div>
 
@@ -85,8 +85,6 @@ export default {
   components: {},
 
   computed: {},
-
-  mounted: {},
 
   methods: {}
 }

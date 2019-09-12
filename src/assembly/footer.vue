@@ -8,15 +8,16 @@
 <script>
 export default {
   name: 'Footer',
+
   data() {
     return {};
   },
 
-  components: {},
+  components: {
+
+  },
 
   computed: {},
-
-  mounted: {},
 
   methods: {}
 }

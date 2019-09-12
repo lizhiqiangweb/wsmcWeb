@@ -5,13 +5,13 @@
 
   </div>
   <div class="works content">
-    <div class="worksItem" v-for="(item, index) in imgList" :key="index">
-      <img :src="item" alt="">
+    <div class="worksItem" v-for="(item, index) in dataList" :key="index">
+      <img :src="item.imgList" alt="">
     </div>
   </div>
 
   <div class="page">
-    <el-pagination background="true" layout="prev, pager, next" :total="100">
+    <el-pagination background="true" layout="prev, pager, next" :total="1">
     </el-pagination>
   </div>
 </div>
@@ -21,16 +21,21 @@
 export default {
   data() {
     return {
-      imgList: [
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg'),
-        require('@/assets/images/memberWorks/wroks_img1.jpg')
+      dataList: [{
+          id: 'sj1',
+          imgList: [
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg'),
+            require('@/assets/images/memberWorks/wroks_img1.jpg')
+          ]
+        }
+
       ]
     };
   },

@@ -23,7 +23,7 @@
   </div>
 
   <div class="page">
-    <el-pagination background="true" layout="prev, pager, next" :total="100">
+    <el-pagination background layout="prev, pager, next" :total="1">
     </el-pagination>
   </div>
 
@@ -41,45 +41,31 @@ export default {
         require("@/assets/images/banner3.jpg"),
       ],
       itemList: [{
-          imgUrl: require('@/assets/images/number_img1.jpg'),
-          name: '晶晶',
-          numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          imgUrl: require('@/assets/images/team/hj.jpg'),
+          name: '胡静',
+          numberDis: '五年工作经验，擅长美式、北欧',
+          ideaDis: '室内设计的首要目标在于满足客户生活的基本需要。简单的家居空间，通过设计更加富有艺术美感并同时改善生活空间的舒适度，让您十年后仍爱你的家。',
           url: '/teamMember'
         },
         {
-          imgUrl: require('@/assets/images/number_img1.jpg'),
-          name: '晶晶',
-          numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          imgUrl: require('@/assets/images/team/lym.jpg'),
+          name: '刘益明',
+          numberDis: '二年工作经验，擅长轻奢、北欧',
+          ideaDis: '以人为本；好的设计来自于对业主全方位的了解及沟通，只有基于人来思考设计，才能做出好的设计。',
           url: '/teamMember'
         },
         {
-          imgUrl: require('@/assets/images/number_img1.jpg'),
-          name: '晶晶',
-          numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          imgUrl: require('@/assets/images/team/yll.jpg'),
+          name: '袁玲玲',
+          numberDis: '五年工作经验，擅长地中海、轻奢',
+          ideaDis: '设计不但要引领潮流、还要融入生活、设计灵感、是出自于生活但又高于生活的一种产物。',
           url: '/teamMember'
         },
         {
-          imgUrl: require('@/assets/images/number_img1.jpg'),
-          name: '晶晶',
-          numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
-          url: '/teamMember'
-        },
-        {
-          imgUrl: require('@/assets/images/number_img1.jpg'),
-          name: '晶晶',
-          numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
-          url: '/teamMember'
-        },
-        {
-          imgUrl: require('@/assets/images/number_img1.jpg'),
-          name: '晶晶',
-          numberDis: '3年工作经验，擅长简欧轻奢和现代风格',
-          ideaDis: '用心体验生活的点滴，才能从细节中创造出更为舒适的居住环境',
+          imgUrl: require('@/assets/images/team/zyt.jpg'),
+          name: '周玉婷',
+          numberDis: '三年工作经验，擅长新中式、简欧',
+          ideaDis: '设计源于生活，生活因设计而改变！成就空间和谐，让设计物有所值，让细节缔造完美！',
           url: '/teamMember'
         }
       ]
@@ -89,8 +75,6 @@ export default {
   components: {},
 
   computed: {},
-
-  mounted: {},
 
   methods: {
     

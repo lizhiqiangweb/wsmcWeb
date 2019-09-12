@@ -44,7 +44,7 @@
     <h2>个性化整装产品</h2>
     <div class="list">
       <ul>
-        <li v-for="(item, index) in list" :key="index" @click="cur1=index" :class="cur1==index ? 'active':''">{{item}}</li>
+        <li v-for="(item, listIndex) in list" :key="listIndex" @click="cur1=listIndex" :class="cur1==listIndex ? 'active':''">{{item}}</li>
       </ul>
       <div class="list-content">
         <img src="@/assets/images/product_img1.jpg" alt />
@@ -75,11 +75,11 @@
     <div class="content4-main">
       <div class="content4-left">
         <ul>
-          <li v-for="(item, index) in list1" :key="index" @click="cur=index" :class="cur == index ? 'active': ''">{{item}}</li>
+          <li v-for="(item, content4Index) in list1" :key="content4Index" @click="cur=content4Index" :class="cur == content4Index ? 'active': ''">{{item}}</li>
         </ul>
       </div>
       <div class="content4-right">
-        <img v-show="cur==index" v-for="(item, index) in imgList" :key="index" :src="item" alt="">
+        <img v-show="content4RightIndex==cur" v-for="(item, content4RightIndex) in imgList" :key="content4RightIndex" :src="item" alt="">
       </div>
     </div>
   </div>
@@ -87,28 +87,30 @@
   <div class="content5">
     <h2>精英设计团队</h2>
     <div class="content5-content">
-      <div class="content5-team window">
-        <div class="team-item" :style="{width:imgWidth+'px'}" v-for="(item, index) in teamList" :key="index" @mouseover="stop" @mouseleave="play">
-          <div class="item-content item-1">
-            <p>{{item.linianDis}}</p>
-            <span>{{item.linian}}</span>
-          </div>
-          <div class="item-content item-2">
-            <p>{{item.xindeDis}}</p>
-            <span>{{item.xinde}}</span>
-          </div>
-          <div class="item-content item-3">
-            <p>{{item.dis}}</p>
-            <span>{{item.name}}</span>
-          </div>
-          <div class="team-icon">
-            <img :src="item.imgUrl" alt="">
+      <div class="content5-team">
+        <div class="teamItemBox">
+          <div class="team-item" v-for="(item, teamItemIndex) in teamList" :key="teamItemIndex" :style="{left: animate + 'px'}">
+            <div class="item-content item-1">
+              <p>{{item.linianDis}}</p>
+              <span>{{item.linian}}</span>
+            </div>
+            <div class="item-content item-2">
+              <p>{{item.xindeDis}}</p>
+              <span>{{item.xinde}}</span>
+            </div>
+            <div class="item-content item-3">
+              <p>{{item.dis}}</p>
+              <span>{{item.name}}</span>
+            </div>
+            <div class="team-icon">
+              <img :src="item.imgUrl" alt="">
+            </div>
           </div>
         </div>
 
         <div class="btn">
-          <div class="pre" @click="move(1000,1,speed)">&lt;</div>
-          <div class="next" @click="move(1000,-1,speed)">&gt;</div>
+          <div class="pre" @click="leftAction()">&lt;</div>
+          <div class="next" @click="rightAction()">&gt;</div>
         </div>
       </div>
 
@@ -159,16 +161,6 @@
 <script>
 export default {
   name: 'home',
-  props: {
-    initialSpeed: {
-      type: Number,
-      default: 30
-    },
-    initialInterval: {
-      type: Number,
-      default: 3
-    }
-  },
   data() {
     return {
       input1: "",
@@ -233,11 +225,7 @@ export default {
           imgUrl: require('@/assets/images/team/lym.jpg')
         }
       ],
-      imgWidth: 1000,
-      currentIndex: 1,
-      distance: -1000,
-      transitionEnd: true,
-      speed: this.initialSpeed
+      animate: '0'
     };
   },
 
@@ -246,79 +234,26 @@ export default {
   },
 
   computed: {
-    containerStyle() {
-      return {
-        transform: 'translate3d(${this.distance}px, 0, 0)'
-      }
-    },
-    interval() {
-      return this.initialInterval * 1000
-    }
+
   },
 
-  mounted() {
-    this.init()
-  },
+  mounted() {},
 
   methods: {
     active: function (number) {
-      this.cur2 = number
+      this.cur2 = number;
     },
-
-    init() {
-      this.play()
-      window.onblur = function () {
-        this.stop()
-      }.bind(this)
-      window.onfocus = function () {
-        this.play()
-      }.bind(this)
-    },
-    move(offset, direction, speed) {
-      if (!this.transitionEnd) return
-      this.transitionEnd = false
-      direction === -1 ? this.currentIndex += offset / 1000 : this.currentIndex -= offset / 1000
-      if (this.currentIndex > 3) this.currentIndex = 1
-      if (this.currentIndex < 1) this.currentIndex = 3
-
-      const destination = this.distance + offset * direction
-      this.animate(destination, direction, speed)
-    },
-    animate(des, direc, speed) {
-      if (this.temp) {
-        window.clearInterval(this.temp);
-        this.temp = null;
+    rightAction() {
+      var count = document.getElementsByClassName('team-item').length;
+      // console.log(count);
+      if (this.animate <= -(count - 1) * 900) {} else {
+        this.animate -= 900;
       }
-      this.temp = window.setInterval(() => {
-        if ((direc === -1 && des < this.distance) || (direc === 1 && des > this.distance)) {
-          this.distance += speed * direc
-        } else {
-          this.transitionEnd = true
-          window.clearInterval(this.temp)
-          this.distance = des
-          if (des < -3000) this.distance = -1000
-          if (des > -1000) this.distance = -3000
-        }
-      }, 20)
     },
-    jump(index) {
-      const direction = index - this.currentIndex >= 0 ? -1 : 1;
-      const offset = Math.abs(index - this.currentIndex) * 1000;
-      const jumpSpeed = Math.abs(index - this.currentIndex) === 0 ? this.speed : Math.abs(index - this.currentIndex) * this.speed;
-      this.move(offset, direction, jumpSpeed)
-    },
-    play() {
-      if (this.timer) {
-        window.clearInterval(this.timer)
-        this.timer = null
+    leftAction() {
+      if (this.animate >= 0) {} else {
+        this.animate += 900;
       }
-      this.timer = window.setInterval(() => {
-        this.move(1000, -1, this.speed)
-      }, this.interval)
-    },
-    stop() {
-      window.clearInterval(this.timer)
-      this.timer = null
     }
   }
 };
@@ -558,49 +493,56 @@ export default {
   .content5-content {
     .content5-team {
       position: relative;
-      width: 900px;
-      overflow: hidden;
-      display: flex;
-      margin: 0 auto;
 
-      .team-item {
+      .teamItemBox {
+        width: 900px;
+        overflow: hidden;
         display: flex;
-        justify-content: center;
+        margin: 0 auto;
 
-        .item-content {
+        .team-item {
           display: flex;
-          margin: 44px 0 0 0;
-          p,
-          span {
-            writing-mode: tb-rl;
-            line-height: 1.8;
+          min-width: 900px;
+          height: auto;
+          position: relative;
+          transition: all .5s ease-in;
+
+          .item-content {
+            display: flex;
+            margin: 44px 0 0 0;
+
+            p,
+            span {
+              writing-mode: tb-rl;
+              line-height: 1.8;
+            }
+
+            p {
+              display: inline-block;
+              min-width: 120px;
+              max-height: 270px;
+              color: #fff;
+            }
+
+            span {
+              display: inline-block;
+              background: #fff;
+              width: 46px;
+              height: 120px;
+              text-align: center;
+              line-height: 46px;
+              margin: 0 0 0 18px;
+            }
           }
 
-          p {
-            display: inline-block;
-            min-width: 120px;
-            max-height: 270px;
-            color: #fff;
+          .team-icon {
+            img {
+              border-radius: 50%;
+              margin: 20px 0 0 44px;
+            }
           }
 
-          span {
-            display: inline-block;
-            background: #fff;
-            width: 46px;
-            height: 120px;
-            text-align: center;
-            line-height: 46px;
-            margin: 0 0 0 18px;
-          }
         }
-
-        .team-icon {
-          img {
-            border-radius: 50%;
-            margin: 0 0 0 44px;
-          }
-        }
-
       }
 
       .btn {
@@ -614,14 +556,23 @@ export default {
           position: absolute;
           top: 45%;
           padding: 12px 16px;
+          transition: all .3s ease-in;
+        }
+
+        .next:hover {
+          background: #fff;
+        }
+
+        .pre:hover {
+          background: #fff;
         }
 
         .pre {
-          left: 1em;
+          left: 20%;
         }
 
         .next {
-          right: 1em;
+          right: 20%;
         }
       }
 

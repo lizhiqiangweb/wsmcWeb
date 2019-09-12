@@ -30,7 +30,7 @@
   </div>
 
   <div class="page">
-    <el-pagination background="true" layout="sizes, prev, pager, next" :page-sizes="6" :pager-count="11" :total="all" @current-change="current_change"></el-pagination>
+    <el-pagination background layout="sizes, prev, pager, next" :pager-count="11" :total="all" @current-change="current_change"></el-pagination>
   </div>
 
 </div>
@@ -161,8 +161,6 @@ export default {
   components: {},
 
   computed: {},
-
-  mounted: {},
 
   methods: {
     current_change(currentPage) { //改变当前页

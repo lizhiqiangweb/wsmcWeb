@@ -9,15 +9,15 @@
         <p>HUNAN WEISHIMEICHUANG DECORATION ENGINEERING CO., LTD</p>
       </div>
     </div>
-    <div class="navlist" ref="nav" v-bind="show">
+    <div class="navlist" ref="nav">
       <ul>
-        <li v-for="(item, index) in navlist" :key="index" @click="cur=index" :class="cur==index?'active':''">
-          <router-link :to="{ path : item.path }">{{item.tit}}</router-link>
+        <li id="navLi" v-for="(item, index) in navlist" :key="index" @click="cur=index" :class="cur==index?'active':''">
+          <router-link :to="{ path : item.path }" @click.native="changeNav(index)">{{item.tit}}</router-link>
         </li>
       </ul>
     </div>
   </div>
-  
+
 </div>
 </template>
 
@@ -61,18 +61,24 @@ export default {
 
   },
 
-  mounted: {
-
+  mounted() {
+    //获取本地储存的cur值，解决页面刷新后导航选取bug
+    var localCur = JSON.parse(window.localStorage.getItem('cur'));
+    this.cur = localCur;
   },
-
   //在实例创建后获取传参
   created() {
-
+    
   },
 
   methods: {
-
-  },
+    //实时获取导航选取的值 配合@click.native使用
+    changeNav(index) {
+      this.cur = index;
+      //设置本地储存
+      localStorage.setItem('cur', index);
+    }
+  }
 };
 </script>
 
