@@ -11,11 +11,11 @@
   <div class="content flex">
     <div class="content1-left">
       <div class="content1-item" :class="{active:cur2==0}" @click="active(0)">
-        <img src="@/assets/images/icon1.jpg" alt />
+        <img class="icon" src="@/assets/images/icon11.png" alt ref="icon1" />
         <div>免费上门量尺</div>
       </div>
       <div class="content1-item" :class="{active:cur2==1}" @click="active(1)">
-        <img src="@/assets/images/icon3.jpg" alt />
+        <img class="icon" src="@/assets/images/icon2.png" alt ref="icon2" />
         <div>免费出装修预算</div>
       </div>
     </div>
@@ -30,11 +30,11 @@
     </div>
     <div class="content1-right">
       <div class="content1-item" :class="{active:cur2==2}" @click="active(2)">
-        <img src="@/assets/images/icon2.jpg" alt />
+        <img class="icon" src="@/assets/images/icon3.png" alt ref="icon3" />
         <div>免费卫生清洁</div>
       </div>
       <div class="content1-item" :class="{active:cur2==3}" @click="active(3)">
-        <img src="@/assets/images/icon4.jpg" alt />
+        <img class="icon" src="@/assets/images/icon4.png" alt ref="icon4" />
         <div>免费估算装修报价</div>
       </div>
     </div>
@@ -242,6 +242,7 @@ export default {
   methods: {
     active: function (number) {
       this.cur2 = number;
+      console.log(this.cur2);
     },
     rightAction() {
       var count = document.getElementsByClassName('team-item').length;
