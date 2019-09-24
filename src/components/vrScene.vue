@@ -18,7 +18,7 @@
 
   <div class="content imgList">
     <ul>
-      <li v-for="(item, index) in imgList" :key="index">
+      <li v-for="(item, index) in imgList" :key="index" @click="goTo(item.path)">
         <img :src="item.url" alt="">
         <h4>{{item.tit}}</h4>
         <p>{{item.dis}}<span>立即预约</span></p>
@@ -59,24 +59,46 @@ export default {
         }
       ],
       imgList: [{
-          url: require('../assets/images/companyCase_img1.jpg'),
+          url: require('../assets/images/vr/companyCase_img1.jpg'),
+          path: 'https://720.3vjia.com/S2FDDJFHH',
           tit: '北欧720全景',
-          dis: '三居｜100-120㎡'
+          dis: '两室一厅｜80-120㎡'
         },
         {
-          url: require('../assets/images/companyCase_img1.jpg'),
+          url: require('../assets/images/vr/companyCase_img2.jpg'),
+          path: 'https://720.3vjia.com/S6EKGEDLI',
           tit: '北欧720全景',
-          dis: '三居｜100-120㎡'
+          dis: '三室一厅｜100-120㎡'
         },
         {
-          url: require('../assets/images/companyCase_img1.jpg'),
-          tit: '北欧720全景',
-          dis: '三居｜100-120㎡'
+          url: require('../assets/images/vr/companyCase_img3.jpg'),
+          path: 'https://720.3vjia.com/S4FDHGJIG',
+          tit: '后现代720全景',
+          dis: '一室一厅｜100-120㎡'
         },
         {
-          url: require('../assets/images/companyCase_img1.jpg'),
-          tit: '北欧720全景',
-          dis: '三居｜100-120㎡'
+          url: require('../assets/images/vr/companyCase_img4.jpg'),
+          path: 'https://720.3vjia.com/S1FDFJKGF',
+          tit: '美式轻奢720全景',
+          dis: '三室一厅｜100-120㎡'
+        },
+        {
+          url: require('../assets/images/vr/companyCase_img5.jpg'),
+          path: 'https://720.3vjia.com/S1FDEHDLD',
+          tit: '美式轻奢720全景',
+          dis: '四室两厅｜120-160㎡'
+        },
+        {
+          url: require('../assets/images/vr/companyCase_img6.jpg'),
+          path: 'https://720.3vjia.com/S8FDCLILK',
+          tit: '现代轻奢720全景',
+          dis: '三室两厅｜120-140㎡'
+        },
+        {
+          url: require('../assets/images/vr/companyCase_img6.jpg'),
+          path: 'https://720.3vjia.com/S8FCJGDGG',
+          tit: '新中式720全景',
+          dis: '三室一厅｜120-140㎡'
         }
       ]
     };
@@ -86,7 +108,11 @@ export default {
 
   computed: {},
 
-  methods: {}
+  methods: {
+    goTo(e) {
+      window.location.href = e;
+    }
+  }
 }
 </script>
 
@@ -126,6 +152,23 @@ export default {
         background: #fff;
         padding: 8px 8px;
         margin: 0 8px 26px 0;
+        width: 375px;
+      }
+
+      li:hover {
+        cursor: pointer;
+      }
+
+      li:hover img {
+        transform: scale(1.075);
+      }
+
+      img {
+        transition: all .5s ease-in;
+        width: 375px;
+        height: 375px;
+        display: block;
+        overflow: hidden;
       }
 
       h4 {
@@ -134,7 +177,9 @@ export default {
 
       p {
         margin: 0 0 12px 0;
-        span  {
+        position: relative;
+
+        span {
           display: inline-block;
           width: 188px;
           height: 44px;
@@ -142,18 +187,23 @@ export default {
           line-height: 44px;
           color: #fff;
           text-align: center;
-          margin: 0 0 0 54px;
+          position: absolute;
+          right: 0;
+          bottom: 0;
         }
+
         span:hover {
           cursor: pointer;
         }
       }
     }
   }
+
   .page {
     display: flex;
     justify-content: center;
     padding: 50px 0 50px 0;
+
     .el-pager li {
       background-color: #fff !important;
     }

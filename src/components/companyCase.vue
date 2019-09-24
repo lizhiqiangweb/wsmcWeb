@@ -11,13 +11,20 @@
   <div class="content list">
     <ul v-for="(item, index) in list" :key="index">
       <p>{{item.tit}}</p>
-      <li v-for="(item1, index1) in item.listItem1" :key="index1" v-on:click="selected1(index1)" @click="cur1=index1" :class="cur1==index1 ? 'active':''">{{item1}}</li>
+      <li v-for="(item1, index1) in item.listItem1" :key="index1" v-on:click="selected1(index1)" @click="cur1=index1" :class="cur1==index1 ? 'active':''" :style="[]">{{item1}}</li>
       <li v-for="(item2, index2) in item.listItem2" :key="index2" v-on:click="selected2(index2)" @click="cur2=index2" :class="cur2==index2 ? 'active':''">{{item2}}</li>
       <li v-for="(item3, index3) in item.listItem3" :key="index3" v-on:click="selected3(index3)" @click="cur3=index3" :class="cur3==index3 ? 'active':''">{{item3}}</li>
     </ul>
   </div>
 
-  <div class="content imgList">
+  <div class="content imgList"> 
+    <!-- 敬请期待 -->
+    <!-- <div class="noMore" v-if="typeId != 8 && typeId != 0">
+      <div class="noMoreBox">
+        <p>Data uploading,please look</p>
+        <h1>资料上传中，敬请期待...</h1>
+      </div>
+    </div> -->
     <ul>
       <li v-for="(item, index) in imgList.slice((currentPage-1)*pagesize,currentPage*pagesize)" :key="index" v-show="(typeId == item.type || typeId == 0) && (styleId1 == item.style || styleId1 == 0)">
         <router-link :to="{ path : item.url, query: { case: item.id } }">
@@ -30,7 +37,7 @@
   </div>
 
   <div class="page">
-    <el-pagination background layout="sizes, prev, pager, next" :pager-count="11" :total="all" @current-change="current_change"></el-pagination>
+    <el-pagination background layout="prev, pager, next" :pager-count="11" :total="all" @current-change="current_change"></el-pagination>
   </div>
 
 </div>
@@ -151,37 +158,46 @@ export default {
           url: '/caseContent',
           type: 8
         }
-
       ],
+      notAllowedStyle: {
+        "pointer-events": "none !important",
+        "cursor": "not-allowed !important"
+      }
     };
   },
   created() {
+
+  },
+
+  mounted() {
     this.all = (this.imgList.length) / 6 * 10;
   },
   components: {},
 
-  computed: {},
+  computed: {
+
+  },
 
   methods: {
     current_change(currentPage) { //改变当前页
       this.currentPage = currentPage
     },
-    selected1: function(index) {
-      if(index) {
+    selected1: function (index) {
+      if (index) {
         this.typeId = index;
       } else {
         this.typeId = 0;
       }
     },
-    selected2: function(index) {
-      if(index) {
+    selected2: function (index) {
+      if (index) {
         this.styleId1 = index;
       } else {
         this.styleId1 = 0;
       }
     },
-    selected3: function(index) {
-      if(index) {
+    selected3: function (index) {
+      if (index) {
         this.styleId2 = index;
       } else {
         this.styleId2 = 0;
@@ -219,6 +235,45 @@ export default {
   }
 
   .imgList {
+    // 敬请期待
+    // .noMore {
+    //   display: flex;
+    //   justify-content: center;
+
+    //   p {
+    //     color: rgb(3, 85, 122);
+    //     font-size: 22px;
+    //     text-align: center;
+    //   }
+
+    //   p::before {
+    //     content: '';
+    //     display: block;
+    //     height: 2px;
+    //     width: 68px;
+    //     background: rgb(3, 85, 122);
+    //     position: relative;
+    //     top: 16px;
+    //     right: 48px;
+    //   }
+
+    //   p::after {
+    //     content: '';
+    //     display: block;
+    //     height: 2px;
+    //     width: 68px;
+    //     background: rgb(3, 85, 122);
+    //     position: relative;
+    //     left: 328px;
+    //     bottom: 15px;
+    //   }
+
+    //   h1 {
+    //     color: rgba(3, 85, 122, 0.9);
+    //     margin: 12px 0 68px 0;
+    //   }
+    // }
+
     ul {
       display: flex;
       flex-wrap: wrap;
