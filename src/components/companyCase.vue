@@ -17,7 +17,7 @@
     </ul>
   </div>
 
-  <div class="content imgList"> 
+  <div class="content imgList">
     <!-- 敬请期待 -->
     <!-- <div class="noMore" v-if="typeId != 8 && typeId != 0">
       <div class="noMoreBox">

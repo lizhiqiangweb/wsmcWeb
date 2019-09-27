@@ -72,8 +72,12 @@
     </div>
 
     <div class="item-main">
-      <div class="main-imgList">
-        <img v-for="(item, videoIndex) in imgList1" :key="videoIndex" :src="item" alt="">
+      <div class="main-videoList">
+        <div class="videoBox" v-for="(item, videoIndex) in videoList" :key="videoIndex">
+          <img :src="item.imgUrl" alt="" @click="videoIndex=fullScreenIndex">
+          <span></span>
+          <video v-show="false" controls="controls" x5-video-player-type="h5" :src="item.videoUrl" :class="fullScreenIndex==videoIndex ? 'fullScreen':''"></video>
+        </div>
       </div>
     </div>
 
@@ -86,6 +90,7 @@ export default {
   data() {
     return {
       bannerHeight: 740,
+      fullScreenIndex: 0,
       banner: [
         require("@/assets/images/banner1.jpg"),
         require("@/assets/images/banner2.jpg"),
@@ -101,15 +106,30 @@ export default {
         require('@/assets/images/aboutUs_img1.jpg'),
         require('@/assets/images/aboutUs_img1.jpg')
       ],
-      imgList1: [
-        require('@/assets/images/aboutUs_img2.jpg'),
-        require('@/assets/images/aboutUs_img3.jpg'),
-        require('@/assets/images/aboutUs_img2.jpg'),
-        require('@/assets/images/aboutUs_img3.jpg'),
-        require('@/assets/images/aboutUs_img2.jpg'),
-        require('@/assets/images/aboutUs_img3.jpg'),
-        require('@/assets/images/aboutUs_img2.jpg'),
-        require('@/assets/images/aboutUs_img3.jpg')
+      videoList: [{
+          imgUrl: require('@/assets/images/video/videoImg1.jpg'),
+          videoUrl: 'http://www.tq-cs.com/wechat/kanuoya/video/kanuoya1.mp4',
+        },
+        {
+          imgUrl: require('@/assets/images/video/videoImg2.jpg'),
+          videoUrl: 'http://www.tq-cs.com/wechat/kanuoya/video/kanuoya2.mp4',
+        },
+        {
+          imgUrl: require('@/assets/images/video/videoImg3.jpg'),
+          videoUrl: 'http://www.tq-cs.com/wechat/kanuoya/video/kanuoya3.mp4',
+        },
+        {
+          imgUrl: require('@/assets/images/video/videoImg4.jpg'),
+          videoUrl: 'http://www.tq-cs.com/wechat/kanuoya/video/kanuoya4.mp4',
+        },
+        {
+          imgUrl: require('@/assets/images/video/videoImg5.jpg'),
+          videoUrl: 'http://www.tq-cs.com/wechat/kanuoya/video/kanuoya5.mp4',
+        },
+        {
+          imgUrl: require('@/assets/images/video/videoImg6.jpg'),
+          videoUrl: 'http://www.tq-cs.com/wechat/kanuoya/video/kanuoya6.mp4',
+        }
       ],
       postList1: [{
         post: '销售人员8名（市场部)',
@@ -154,7 +174,9 @@ export default {
 
   computed: {},
 
-  methods: {}
+  methods: {
+
+  }
 }
 </script>
 
@@ -222,6 +244,43 @@ export default {
         margin: 0 10px 10px 0;
       }
     }
+
+    .main-videoList {
+      padding: 0 0 0 30px;
+      display: flex;
+      flex-wrap: wrap;
+
+      video,
+      img {
+        width: 330px;
+        height: 240px;
+        margin: 0 10px 10px 0;
+      }
+
+      .videoBox {
+        position: relative;
+
+        span {
+          display: block;
+          width: 46px;
+          height: 46px;
+          background: url('../assets/images/icon_play.png');
+          position: absolute;
+          left: 142px;
+          top: 97px;
+          opacity: 0;
+          transition: all .5s ease-in;
+        }
+      }
+
+      .videoBox:hover {
+        cursor: pointer;
+      }
+
+      .videoBox:hover span {
+        opacity: 1;
+      }
+    }
   }
 
   .item-main1 {
@@ -250,6 +309,11 @@ export default {
     }
 
   }
-
 }
+
+.fullScreen {
+  object-fit: cover;
+}
+
+.btnShow {}
 </style>

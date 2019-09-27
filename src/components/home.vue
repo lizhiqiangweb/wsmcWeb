@@ -139,8 +139,12 @@
           </li>
         </ul>
         <div class="content5-btn">
-          <span class="more">查看更多案例</span>
-          <span class="more">查看更多设计师</span>
+          <router-link to="/companyCase">
+            <span class="more">查看更多案例</span>
+          </router-link>
+          <router-link to="/team">
+            <span class="more">查看更多设计师</span>
+          </router-link>
         </div>
       </div>
     </div>
@@ -257,7 +261,7 @@ export default {
   },
 
   mounted() {
-    
+
   },
 
   methods: {
@@ -660,19 +664,26 @@ export default {
         display: flex;
         justify-content: center;
 
+        a {
+          color: #333;
+        }
+
         .more {
           width: 300px;
           height: 62px;
           background: #fff;
           display: inline-block;
-          font-size: 20px;
+          font-size: 18px;
           text-align: center;
           line-height: 62px;
           margin: 50px 40px 7px 0;
+          transition: all .5s ease-in;
         }
 
         span:hover {
           cursor: pointer;
+          background: #2a498a;
+          color: #fff;
         }
       }
     }
