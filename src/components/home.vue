@@ -11,11 +11,13 @@
   <div class="content flex">
     <div class="content1-left">
       <div class="content1-item" :class="{active:cur2==0}" @click="active(0)">
-        <img class="icon" src="@/assets/images/icon11.png" alt ref="icon1" />
+        <img class="icon" v-show="cur2==0" src="@/assets/images/icon11.png" alt />
+        <img class="icon" v-show="cur2!==0" src="@/assets/images/icon1.png" alt />
         <div>免费上门量尺</div>
       </div>
       <div class="content1-item" :class="{active:cur2==1}" @click="active(1)">
-        <img class="icon" src="@/assets/images/icon2.png" alt ref="icon2" />
+        <img class="icon" v-show="cur2!==1" src="@/assets/images/icon2.png" alt />
+        <img class="icon" v-show="cur2==1" src="@/assets/images/icon22.png" alt />
         <div>免费出装修预算</div>
       </div>
     </div>
@@ -30,11 +32,13 @@
     </div>
     <div class="content1-right">
       <div class="content1-item" :class="{active:cur2==2}" @click="active(2)">
-        <img class="icon" src="@/assets/images/icon3.png" alt ref="icon3" />
+        <img class="icon" v-show="cur2!==2" src="@/assets/images/icon3.png" alt />
+        <img class="icon" v-show="cur2==2" src="@/assets/images/icon33.png" alt />
         <div>免费卫生清洁</div>
       </div>
       <div class="content1-item" :class="{active:cur2==3}" @click="active(3)">
-        <img class="icon" src="@/assets/images/icon4.png" alt ref="icon4" />
+        <img class="icon" v-show="cur2!==3" src="@/assets/images/icon4.png" alt />
+        <img class="icon" v-show="cur2==3" src="@/assets/images/icon44.png" alt />
         <div>免费估算装修报价</div>
       </div>
     </div>
@@ -109,32 +113,13 @@
       <div class="content5-case">
         <h3>优秀设计案例</h3>
         <ul>
-          <li class="item-case">
-            <img src="@/assets/images/case_img1.jpg" alt="">
+          <li class="item-case" v-for="(item, caseIndex) in caseList" :key="caseIndex">
+            <router-link :to="{ path : '/caseContent', query: { case: item.id } }">
+              <img :src="item.imgUrl" alt="">
+            </router-link>
             <div class="case-dis">
-              <p>户型:</p>
-              <p>风格:</p>
-            </div>
-          </li>
-          <li class="item-case">
-            <img src="@/assets/images/case_img1.jpg" alt="">
-            <div class="case-dis">
-              <p>户型:</p>
-              <p>风格:</p>
-            </div>
-          </li>
-          <li class="item-case">
-            <img src="@/assets/images/case_img1.jpg" alt="">
-            <div class="case-dis">
-              <p>户型:</p>
-              <p>风格:</p>
-            </div>
-          </li>
-          <li class="item-case">
-            <img src="@/assets/images/case_img1.jpg" alt="">
-            <div class="case-dis">
-              <p>户型:</p>
-              <p>风格:</p>
+              <p>户型:{{item.type}}</p>
+              <p>风格:{{item.style}}</p>
             </div>
           </li>
         </ul>
@@ -158,16 +143,17 @@ export default {
   name: 'home',
   data() {
     return {
-      input1: "",
+      input1: "", //表单的值
       input2: "",
       input3: "",
       input4: "",
       list: ["新中式风格", "现代黑白灰", "地中海风格", "简欧现代", "更多风格"],
       list1: ['客厅', '餐厅', '厨房', '卧室', '书房', '玄关', '衣帽间', '儿童房'],
-      cur: 0,
-      cur1: 0,
-      cur2: 0,
-      bannerHeight: 740,
+      cur: 0, //八大空间轻奢配置tab切换
+      cur1: 0, //个性化整装产品tab切换
+      cur2: 0, //icon的tab切换
+      bannerHeight: 740, //banner的高度设置
+      iconShow: true, //控制icon的图片切换
       banner: [
         require("@/assets/images/banner1.jpg"),
         require("@/assets/images/banner2.jpg"),
@@ -183,6 +169,7 @@ export default {
         require('@/assets/images/f_config1.jpg'),
         require('@/assets/images/f_config1.jpg')
       ],
+      iconImg1: require('@/assets/images/icon11.png'),
       content2List: [{
         imgUrl: require('@/assets/images/product_img1.jpg'),
         tit: '客厅/卧室/阳台/厨房/卫生间',
@@ -248,7 +235,28 @@ export default {
           imgUrl: require('@/assets/images/team/lym.jpg')
         }
       ],
-      animate: '0'
+      animate: '0',
+      caseList: [{
+        id: 'bo1',
+        imgUrl: require('../assets/images/case/bo/1/main.jpg'),
+        type: '二居 | 80-100㎡',
+        style: '北欧风格',
+      }, {
+        id: 'bo2',
+        imgUrl: require('../assets/images/case/bo/2/main.jpg'),
+        type: '三居 | 100-140㎡',
+        style: '北欧风格'
+      }, {
+        id: 'bo3',
+        imgUrl: require('../assets/images/case/bo/3/main.jpg'),
+        type: '二居 | 80-120㎡',
+        style: '北欧风格'
+      }, {
+        id: 'bo4',
+        imgUrl: require('../assets/images/case/bo/4/main.jpg'),
+        type: '三居 | 120-150㎡',
+        style: '北欧风格'
+      }]
     };
   },
 
@@ -287,6 +295,9 @@ export default {
           path: '/companyCase'
         })
       };
+    },
+    iconToggle() {
+      this.iconShow = !this.iconShow
     }
   }
 };
@@ -639,12 +650,22 @@ export default {
       ul {
         display: flex;
         justify-content: center;
+        position: relative;
 
         .item-case {
           width: 293px;
           height: 296px;
           background: #fff;
-          margin: 0 6px 0 0;
+          margin: 0 10px 0 0;
+          position: relative;
+          bottom: 0;
+          transition: all .3s ease-in;
+
+          img {
+            width: 293px;
+            height: 210px;
+            display: block;
+          }
 
           .case-dis {
             padding: 14px 20px;
@@ -653,6 +674,12 @@ export default {
               line-height: 1.6;
             }
           }
+        }
+
+        .item-case:hover {
+          cursor: pointer;
+          bottom: 10px;
+          transform: scale(1.025);
         }
 
         .item-case:last-child {

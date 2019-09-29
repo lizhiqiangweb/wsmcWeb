@@ -91,6 +91,7 @@ export default {
     return {
       bannerHeight: 740,
       fullScreenIndex: 0,
+      videoShow: 0,
       banner: [
         require("@/assets/images/banner1.jpg"),
         require("@/assets/images/banner2.jpg"),

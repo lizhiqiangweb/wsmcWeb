@@ -11,7 +11,7 @@
   <div class="content list">
     <ul v-for="(item, index) in list" :key="index">
       <p>{{item.tit}}</p>
-      <li v-for="(item1, index1) in item.listItem1" :key="index1" v-on:click="selected1(index1)" @click="cur1=index1" :class="cur1==index1 ? 'active':''" :style="[]">{{item1}}</li>
+      <li v-for="(item1, index1) in item.listItem1" :key="index1" v-on:click="selected1(index1)" @click="cur1=index1" :class="cur1==index1 ? 'active':''">{{item1}}</li>
       <li v-for="(item2, index2) in item.listItem2" :key="index2" v-on:click="selected2(index2)" @click="cur2=index2" :class="cur2==index2 ? 'active':''">{{item2}}</li>
       <li v-for="(item3, index3) in item.listItem3" :key="index3" v-on:click="selected3(index3)" @click="cur3=index3" :class="cur3==index3 ? 'active':''">{{item3}}</li>
     </ul>
@@ -100,7 +100,8 @@ export default {
           tit: '北欧风格案例图',
           dis: '| 二居 | 80-120㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 8,
+          style: 2
         },
         {
           id: 'bo4',
@@ -108,7 +109,8 @@ export default {
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 8,
+          style: 3
         },
         {
           id: 'bo5',
@@ -116,7 +118,8 @@ export default {
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 8,
+          style: 4
         },
         {
           id: 'bo6',
@@ -124,39 +127,41 @@ export default {
           tit: '北欧风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 8,
+          style: 5
         },
         {
           id: 'bo7',
           imgUrl: require('../assets/images/case/dzh/1/main.jpg'),
-          tit: '北欧风格案例图',
+          tit: '地中海风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 3,
+          style: 1,
         },
         {
           id: 'bo8',
           imgUrl: require('../assets/images/case/dzh/2/main.jpg'),
-          tit: '北欧风格案例图',
+          tit: '地中海风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 3
         },
         {
           id: 'bo9',
           imgUrl: require('../assets/images/case/dzh/3/main.jpg'),
-          tit: '北欧风格案例图',
+          tit: '地中海风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 3
         },
         {
           id: 'bo10',
           imgUrl: require('../assets/images/case/dzh/4/main.jpg'),
-          tit: '北欧风格案例图',
+          tit: '地中海风格案例图',
           dis: '| 三居 | 120-150㎡ | 北欧装修风格设计',
           url: '/caseContent',
-          type: 8
+          type: 3
         }
       ],
       notAllowedStyle: {

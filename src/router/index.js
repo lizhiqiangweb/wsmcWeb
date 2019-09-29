@@ -1,14 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import home from '../components/home'
-import companyCase from '../components/companyCase'
-import vrScene from '../components/vrScene'
-import team from '../components/team'
-import strategy from '../components/strategy'
-import aboutUs from '../components/aboutUs'
-import slider from '../components/slider' //test
-import teamMember from '../components/teamMember'
-import caseContent from '../components/caseContent'
 
 Vue.use(Router)
 
@@ -18,47 +9,42 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: home
+      component: (resolve) => require(['../components/home'], resolve)
     },
     {
       path: '/companyCase',
-      name: 'case',
-      component: companyCase
+      name: 'companyCase',
+      component: (resolve) => require(['../components/companyCase'], resolve)
     },
     {
       path: '/vrScene',
       name: 'vrScene',
-      component: vrScene
+      component: (resolve) => require(['../components/vrScene'], resolve)
     },
     {
       path: '/team',
       name: 'team',
-      component: team
+      component: (resolve) => require(['../components/team'], resolve)
     },
     {
       path: '/strategy',
       name: 'strategy',
-      component: strategy
+      component: (resolve) => require(['../components/strategy'], resolve)
     },
     {
       path: '/aboutUs',
       name: 'aboutUs',
-      component: aboutUs
-    },
-    {
-      path: '/slider',
-      name: 'slider',
-      component: slider
+      component: (resolve) => require(['../components/aboutUs'], resolve)
     },
     {
       path: '/teamMember',
       name: 'teamMember',
-      component: teamMember
+      component: (resolve) => require(['../components/teamMember'], resolve)
     },
     {
       path: '/caseContent',
       name: 'caseContent',
-      component: caseContent
+      component: (resolve) => require(['../components/caseContent'], resolve)
     }
   ]
 })
