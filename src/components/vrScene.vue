@@ -27,7 +27,7 @@
   </div>
 
   <div class="page">
-    <el-pagination background layout="prev, pager, next" :total="100">
+    <el-pagination background layout="prev, pager, next" :total="all">
     </el-pagination>
   </div>
 
@@ -39,6 +39,7 @@ export default {
   data() {
     return {
       cur: 0,
+      all: '',
       bannerHeight: 740,
       banner: [
         require("@/assets/images/banner1.jpg"),
@@ -106,8 +107,9 @@ export default {
 
   components: {},
 
-  computed: {},
-
+  mounted() {
+    this.all = this.imgList.length;
+  },
   methods: {
     goTo(e) {
       window.location.href = e;

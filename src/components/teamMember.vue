@@ -5,8 +5,8 @@
 
   </div>
   <div class="works content">
-    <div class="worksItem" v-for="(item, index) in dataList" :key="index">
-      <img :src="item.imgList" alt="">
+    <div class="worksItem" v-for="(item, dataIndex) in dataList" :key="dataIndex">
+      <img v-for="(item1, index1) in item.imgList" :key="index1" :src="item1" alt="">
     </div>
   </div>
 
@@ -44,9 +44,13 @@ export default {
 
   computed: {},
 
-  mounted: {},
+  methods: {},
 
-  methods: {}
+  created() {
+    var id = this.$route.query.teamNumber;
+    this.showItem = id;
+    console.log("id :", this.showItem);
+  },
 }
 </script>
 
@@ -70,11 +74,14 @@ export default {
     flex-wrap: wrap;
 
     .worksItem {
-      margin: 0 10px 30px 0;
+      display: flex;
+      flex-wrap: wrap;
 
       img {
         display: block;
-
+        width: 390px;
+        height: 390px;
+        margin: 0 5px 24px;
       }
     }
   }
