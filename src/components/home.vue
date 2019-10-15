@@ -166,8 +166,8 @@ export default {
         require('@/assets/images/f_config4.jpg'),
         require('@/assets/images/f_config5.jpg'),
         require('@/assets/images/f_config6.jpg'),
-        require('@/assets/images/f_config1.jpg'),
-        require('@/assets/images/f_config1.jpg')
+        require('@/assets/images/f_config7.jpg'),
+        require('@/assets/images/f_config8.jpg')
       ],
       iconImg1: require('@/assets/images/icon11.png'),
       content2List: [{
